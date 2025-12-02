@@ -49,6 +49,12 @@ const updateCommentsList = () => {
   state.visibilityComments += newComments.length;
   state.endIndexCurrenCommentList += newComments.length;
   showCommentCount.textContent = state.visibilityComments;
+
+  if (state.visibilityComments === state.commentsList.length) {
+    commentsLoaderBtn.classList.add('hidden');
+  } else {
+    commentsLoaderBtn.classList.remove('hidden');
+  }
 };
 
 const handleClickCommentLoaderBtn = (evt) => {
