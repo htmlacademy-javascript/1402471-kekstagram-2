@@ -66,3 +66,4 @@ const showUploadSuccessMessage = () => {
 };
 
 export { showDataErrorMessage, showUploadErrorMessage, showUploadSuccessMessage };
+console.log(showDataErrorMessage);
