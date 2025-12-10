@@ -1,3 +1,4 @@
+import { keydownEscHandler } from './upload-form.js';
 
 const showDataErrorMessage = () => {
   const dataErrorTemplate = document.querySelector('#data-error');
@@ -19,22 +20,26 @@ const showUploadErrorMessage = () => {
     errorElement.remove();
   };
 
-  const handleErrorEscKeydown = (evt) => {
+  const errorEscKeydownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       closeErrorMessage();
+      document.removeEventListener('keydown', errorEscKeydownHandler);
+      document.addEventListener('keydown', keydownEscHandler);
     }
   };
 
-  const handleOutsideClick = (evt) => {
+  const outsideClickHandler = (evt) => {
     if (evt.target === errorElement) {
       closeErrorMessage();
+      document.removeEventListener('keydown', errorEscKeydownHandler);
+      document.addEventListener('keydown', keydownEscHandler);
     }
   };
 
   errorButton.addEventListener('click', closeErrorMessage);
-  document.addEventListener('keydown', handleErrorEscKeydown);
-  errorElement.addEventListener('click', handleOutsideClick);
+  document.addEventListener('keydown', errorEscKeydownHandler);
+  errorElement.addEventListener('click', outsideClickHandler);
 };
 
 const showUploadSuccessMessage = () => {
@@ -47,22 +52,33 @@ const showUploadSuccessMessage = () => {
     successElement.remove();
   };
 
-  const handleSuccessEscKeydown = (evt) => {
+  const successEscKeydownHandler = (evt) => {
     if (evt.key === 'Escape') {
       evt.preventDefault();
       closeSuccessMessage();
+      document.removeEventListener('keydown', successEscKeydownHandler);
     }
   };
 
-  const handleOutsideClick = (evt) => {
+  const outsideClickHandler = (evt) => {
     if (evt.target === successElement) {
       closeSuccessMessage();
+      document.removeEventListener('keydown', successEscKeydownHandler);
     }
   };
 
   successButton.addEventListener('click', closeSuccessMessage);
-  document.addEventListener('keydown', handleSuccessEscKeydown);
-  successElement.addEventListener('click', handleOutsideClick);
+  document.addEventListener('keydown', successEscKeydownHandler);
+  successElement.addEventListener('click', outsideClickHandler);
 };
 
-export { showDataErrorMessage, showUploadErrorMessage, showUploadSuccessMessage };
+const debounce = (callback, timeoutDelay) => {
+  let timeoutId;
+
+  return (...rest) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => callback.apply(this, rest), timeoutDelay);
+  };
+};
+
+export { showDataErrorMessage, showUploadErrorMessage, showUploadSuccessMessage, debounce };
