@@ -7,3 +7,4 @@ import './constants';
 import './utils';
 import './api';
 import './validation';
+import './filters';

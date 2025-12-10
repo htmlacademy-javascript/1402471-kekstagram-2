@@ -57,17 +57,17 @@ const updateCommentsList = () => {
   }
 };
 
-const handleClickCommentLoaderBtn = (evt) => {
+const clickCommentLoaderBtnHandler = (evt) => {
   evt.preventDefault();
   updateCommentsList();
 };
 
-const handleClickCloseBtn = (evt) => {
+const clickCloseBtnHandler = (evt) => {
   evt.preventDefault();
   toggleVisibilityBigPictureModal();
 };
 
-const handleKeydownEsc = (evt) => {
+const keydownEscHandler = (evt) => {
   if (evt.key === 'Escape') {
     evt.preventDefault();
     toggleVisibilityBigPictureModal();
@@ -102,13 +102,13 @@ export function toggleVisibilityBigPictureModal(dataUser) {
   body.classList.toggle('modal-open');
   if (dataUser) {
     updateBigPictureData(dataUser);
-    closeBtn.addEventListener('click', handleClickCloseBtn);
-    commentsLoaderBtn.addEventListener('click', handleClickCommentLoaderBtn);
-    document.addEventListener('keydown', handleKeydownEsc);
+    closeBtn.addEventListener('click', clickCloseBtnHandler);
+    commentsLoaderBtn.addEventListener('click', clickCommentLoaderBtnHandler);
+    document.addEventListener('keydown', keydownEscHandler);
   } else {
     resetBigPictureData();
-    closeBtn.removeEventListener('click', handleClickCloseBtn);
-    commentsLoaderBtn.removeEventListener('click', handleClickCommentLoaderBtn);
-    document.removeEventListener('keydown', handleKeydownEsc);
+    closeBtn.removeEventListener('click', clickCloseBtnHandler);
+    commentsLoaderBtn.removeEventListener('click', clickCommentLoaderBtnHandler);
+    document.removeEventListener('keydown', keydownEscHandler);
   }
 }

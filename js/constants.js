@@ -5,3 +5,7 @@ export const SCALE_STEP = 25;
 export const SCALE_MIN = 25;
 export const SCALE_MAX = 100;
 export const SCALE_DEFAULT = 100;
+export const MAX_LENGTH_RANDOM_MINIATURES = 10;
+export const TIMEOUT_DELAY = 500;
+export const FILE_TYPES = ['gif', 'jpg', 'jpeg', 'png'];
+
